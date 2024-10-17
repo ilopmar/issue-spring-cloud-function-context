@@ -18,7 +18,13 @@ repositories {
 }
 
 ext {
+  // Regressions with latest version.
+  // The real problem is in spring-cloud-function-context:4.1.3. If we force version 4.1.2 with springCloud 2023.0.3 it also works but
+  // probably there can be other issues when mixing different versions
   set('springCloudVersion', "2023.0.3")
+
+  // It works with this one
+  // set('springCloudVersion', "2023.0.2")
 }
 
 dependencies {
@@ -26,6 +32,10 @@ dependencies {
   implementation 'org.springframework.cloud:spring-cloud-stream'
   implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka'
   implementation 'org.springframework.kafka:spring-kafka'
+
+  // Read the comment above in "springCloudVersion"
+  // implementation 'org.springframework.cloud:spring-cloud-function-context:4.1.2'
+
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
   testImplementation 'org.springframework.boot:spring-boot-testcontainers'
   testImplementation 'org.springframework.cloud:spring-cloud-stream-test-binder'

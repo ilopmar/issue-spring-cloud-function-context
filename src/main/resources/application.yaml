@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: issue-spring-cloud-function
+
+  cloud:
+    function:
+      definition: releaseEventHandler
+    stream:
+      bindings:
+        # Consumer
+        releaseEventHandler-in-0:
+          group: app.releaseEventHandler
+          destination: app.release
+      default-binder: kafka
+      kafka:
+        default:
+          consumer:
+            ackMode: RECORD
+        binder:
+          brokers: localhost:9092
+          producer-properties:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+          enable-observation: true
